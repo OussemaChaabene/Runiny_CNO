@@ -54,7 +54,7 @@ public class PlatService {
             for (Map<String, Object> obj : list) {
                 Plat p = new Plat();
                 p.setId((int) Float.parseFloat(obj.get("id").toString()));
-                p.setSodium(((int) Float.parseFloat(obj.get("age").toString())));
+                p.setSodium(((int) Float.parseFloat(obj.get("sodium").toString())));
                 p.setNom(obj.get("nom").toString());
                 p.setCholesterol(((int) Float.parseFloat(obj.get("cholesterol").toString())));
                 p.setCarbohydrate(((int) Float.parseFloat(obj.get("carbohydrate").toString())));
