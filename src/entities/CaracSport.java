@@ -28,6 +28,13 @@ public class CaracSport {
         this.age = age;
         this.genre = genre;
     }
+    
+    public CaracSport( int taille, int poids, int age) {
+        this.taille = taille;
+        this.poids = poids;
+        this.age = age;
+    
+    }
 
     public CaracSport() {
     }
