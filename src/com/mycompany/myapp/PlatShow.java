@@ -5,45 +5,47 @@
  */
 package com.mycompany.myapp;
 
-import com.codename1.ui.Button;
+import com.codename1.ui.*;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
-import entities.CaracSport;
+import entities.Plat;
 import java.util.ArrayList;
-import services.CaracService;
+import services.PlatService;
 
 /**
  *
  * @author ASUS
  */
-public class caracSportShow extends Form {
-
+public class PlatShow extends Form{
+    
     Form current;
 
-    public caracSportShow(Resources res) {
+    public PlatShow(Resources res) {
 
-        ArrayList<CaracSport> list = CaracService.getInstance().getAllCaracs();
+        ArrayList<Plat> list = PlatService.getInstance().getAllPlats();
 
-        for (CaracSport c : list) {
-
-            Label taille = new Label();//taille,poids,prtoNeeds,calorieNeed,age,genre
-            taille.setText("-Taille : " + c.getTaille() + "\n");
+        for (Plat p : list) {
+            //id,poids,sodium,cholesterol,carbohydrate,protein,calories,nom
+            Label nom = new Label();
+            nom.setText("-Taille : " + p.getNom()+ "\n");
             Label poids = new Label();
-            poids.setText("-Poids : " + c.getPoids() + "\n");
-            Label besoinscal = new Label();
-            besoinscal.setText("-Besoins Calories : " + c.getCalorieNeed() + "\n");
-            Label besoinsprot = new Label();
-            besoinsprot.setText("-Besoins Proteins : " + c.getPrtoNeeds() + "\n");
-            Label age = new Label();
-            age.setText("-Age : " + c.getAge() + "\n");
-            Label genre = new Label();
-            genre.setText("-Sexe : " + c.getGenre() + "\n");
-            Button btnModifCarac = new Button("Modifié Carac");
-            btnModifCarac.setUIID("LoginButton");
+            poids.setText("-Poids : " + p.getPoids()+ "\n");
+            Label calories = new Label();
+            calories.setText("-Calories : " + p.getCalories()+ "\n");
+            Label protein = new Label();
+            protein.setText("-Proteins : " + p.getProtein()+ "\n");
+            Label sodium = new Label();
+            sodium.setText("-sodium : " + p.getSodium()+ "\n");
+            Label cholesterol = new Label();
+            cholesterol.setText("-cholesterol : " + p.getCholesterol()+ "\n");
+            Label carbohydrate = new Label();
+            carbohydrate.setText("-carbohydrate : " + p.getCarbohydrate()+ "\n");
+            Button btnModifPlat = new Button("Modifier Plat");
+            btnModifPlat.setUIID("LoginButton");
 
             //supprimer button
             Label lSupprimer = new Label(" ");
@@ -53,7 +55,6 @@ public class caracSportShow extends Form {
 
             FontImage suprrimerImage = FontImage.createMaterial(FontImage.MATERIAL_DELETE, supprmierStyle);
             lSupprimer.setIcon(suprrimerImage);
-            lSupprimer.setTextPosition(RIGHT);
 
             //click delete icon
             lSupprimer.addPointerPressedListener(l -> {
@@ -65,7 +66,7 @@ public class caracSportShow extends Form {
                 } else {
                     dig.dispose();
                 }
-                if (CaracService.getInstance().deleteCarac(c.getId())) {
+                if (PlatService.getInstance().deletePlat(p.getId())) {
                     System.out.println("supprimé");
                     current.repaint();
                     current.refreshTheme();
@@ -73,15 +74,16 @@ public class caracSportShow extends Form {
 
             });
             Label sep = new Label("\n------------------------------------");
-            addAll(btnModifCarac, taille, poids, besoinsprot, besoinscal, age, genre, sep,lSupprimer);
+            
+            addAll(btnModifPlat, poids,sodium,cholesterol,carbohydrate,protein,calories,nom, sep,lSupprimer);
         }
-        setTitle("Liste caracs");
 
-        Button btnAddCarac = new Button("Ajouter Carac");
-        btnAddCarac.setUIID("LoginButton");
-        btnAddCarac.addActionListener(e -> new caracSportAdd(current, res).show());
+        Button btnAddPlat = new Button("Ajouter Plat");
+        btnAddPlat.setUIID("LoginButton");
+        btnAddPlat.addActionListener(e -> new PlatAdd(current, res).show());
 
-        addAll(btnAddCarac);
+        addAll(btnAddPlat);
     }
 
+    
 }

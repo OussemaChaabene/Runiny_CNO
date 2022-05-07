@@ -12,38 +12,39 @@ import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.events.ActionListener;
 import entities.CaracSport;
-import utils.statics;
+import entities.Plat;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import utils.statics;
+
 /**
  *
  * @author ASUS
  */
-public class CaracService {
-   
+public class PlatService {
     
-    public ArrayList<CaracSport> caracs;
+        public ArrayList<Plat> plats;
 
-    public static CaracService instance = null;
+    public static PlatService instance = null;
     public boolean resultOK;
     private ConnectionRequest req;
 
-    private CaracService() {
+    private PlatService() {
         req = new ConnectionRequest();
     }
 
-    public static CaracService getInstance() {
+    public static PlatService getInstance() {
         if (instance == null) {
-            instance = new CaracService();
+            instance = new PlatService();
         }
         return instance;
     }
 
-    public ArrayList<CaracSport> parseCaracs(String jsonText) {
+    public ArrayList<Plat> parsePlats(String jsonText) {
         try {
-            caracs = new ArrayList<>();
+            plats = new ArrayList<>();
             JSONParser j = new JSONParser();
             Map<String, Object> tasksListJson
                     = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
@@ -51,52 +52,55 @@ public class CaracService {
             List<Map<String, Object>> list = (List<Map<String, Object>>) tasksListJson.get("root");
 
             for (Map<String, Object> obj : list) {
-                CaracSport cs = new CaracSport();
-                cs.setId((int) Float.parseFloat(obj.get("id").toString()));
-                cs.setAge(((int) Float.parseFloat(obj.get("age").toString())));
-                cs.setGenre(obj.get("genre").toString());
-                cs.setCalorieNeed(((int) Float.parseFloat(obj.get("calorieNeed").toString())));
-                cs.setPrtoNeeds(((int) Float.parseFloat(obj.get("protNeeds").toString())));
-                cs.setTaille(((int) Float.parseFloat(obj.get("taille").toString())));
-                cs.setPoids(((int) Float.parseFloat(obj.get("poids").toString())));
+                Plat p = new Plat();
+                p.setId((int) Float.parseFloat(obj.get("id").toString()));
+                p.setSodium(((int) Float.parseFloat(obj.get("age").toString())));
+                p.setNom(obj.get("nom").toString());
+                p.setCholesterol(((int) Float.parseFloat(obj.get("cholesterol").toString())));
+                p.setCarbohydrate(((int) Float.parseFloat(obj.get("carbohydrate").toString())));
+                p.setCalories(((int) Float.parseFloat(obj.get("calories").toString())));
+                p.setProtein(((int) Float.parseFloat(obj.get("protein").toString())));
+                p.setPoids(((int) Float.parseFloat(obj.get("poids").toString())));
 
-                caracs.add(cs);
+                plats.add(p);
             }
 
         } catch (IOException ex) {
 
         }
-        return caracs;
+        return plats;
     }
 
-    public ArrayList<CaracSport> getAllCaracs() {
+    public ArrayList<Plat> getAllPlats() {
 
-        String url = statics.BASE_URL + "j/caracs";
+        String url = statics.BASE_URL + "j/plat/all";
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {
-                caracs = parseCaracs(new String(req.getResponseData()));
+                plats = parsePlats(new String(req.getResponseData()));
                 req.removeResponseListener(this);
             }
         });
         NetworkManager.getInstance().addToQueueAndWait(req);
-        return caracs;
+        return plats;
     }
 
-    public boolean addCarac(CaracSport cs) {
-        System.out.println(cs.toString());
+    public boolean addPlat(Plat p) {
+        System.out.println(p.toString());
         System.out.println("********");
-        //String url = Statics.BASE_URL + "create?name=" + t.getName() + "&status=" + t.getStatus();
-        String url = statics.BASE_URL + "j/addCarac";
+        String url = statics.BASE_URL + "j/addPlat";
 
         req.setUrl(url);
 
-        req.addArgument("taille", cs.getTaille() + "");
-        req.addArgument("poids", cs.getPoids() + "");
-        req.addArgument("age", cs.getAge() + "");
-        req.addArgument("genre", cs.getGenre());
+        req.addArgument("sodium", p.getSodium()+ "");
+        req.addArgument("poids", p.getPoids() + "");
+        req.addArgument("cholesterol", p.getCholesterol() + "");
+        req.addArgument("carbohydrate", p.getCarbohydrate()+"");
+        req.addArgument("protein", p.getProtein()+"");
+        req.addArgument("calories", p.getProtein()+"");
+        req.addArgument("nom", p.getNom());
 
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
@@ -109,8 +113,8 @@ public class CaracService {
         return resultOK;
     }
 
-    public boolean deleteCarac(int id) {
-        String url = statics.BASE_URL + "j/suppCarac/" + id;
+    public boolean deletePlat(int id) {
+        String url = statics.BASE_URL + "j/suppPlat/" + id;
 
         req.setUrl(url);
 
@@ -126,8 +130,8 @@ public class CaracService {
         return resultOK;
     }
 
-    public boolean modifierCarac(CaracSport c) {
-        String url = statics.BASE_URL + "/j/modifCarac?id=" + c.getId() + "&age=" + c.getAge() + "&taille=" + c.getTaille() + "&poids=" + c.getPoids() + "&genre=" + c.getGenre();
+    public boolean modifierPlat(Plat p) {
+        String url = statics.BASE_URL + "j/modifPlat?sodium=" + p.getSodium()+ "&cholesterol=" + p.getCholesterol()+ "&carbohydrate=" + p.getCarbohydrate()+ "&protein=" + p.getProtein()+"&calories="+p.getCalories()+"&nom="+p.getNom();
         req.setUrl(url);
 
         req.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -142,4 +146,5 @@ public class CaracService {
         return resultOK;
 
     }
+    
 }
