@@ -38,7 +38,7 @@ import com.codename1.ui.util.Resources;
  *
  * @author Shai Almog
  */
-public class LoginForm extends Form {
+public class LoginForm extends Form{
     public LoginForm(Resources theme) {
         super(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER_ABSOLUTE));
         setUIID("LoginForm");
