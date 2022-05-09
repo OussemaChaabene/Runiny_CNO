@@ -20,6 +20,7 @@ import com.codename1.ui.util.Resources;
 import entities.CaracSport;
 import entities.Plat;
 import services.CaracService;
+import services.PlatService;
 
 /**
  *
@@ -28,63 +29,63 @@ import services.CaracService;
 public class PlatAdd extends SideMenuBaseForm{
 
         public PlatAdd(Form previous, Resources res) {
-//
-//        super(BoxLayout.y());
-//        Toolbar tb = getToolbar();
-//        tb.setTitleCentered(false);
-//
-//        Button menuButton = new Button("");
-//        menuButton.setUIID("Title");
-//        FontImage.setMaterialIcon(menuButton, FontImage.MATERIAL_MENU);
-//        menuButton.addActionListener(e -> getToolbar().openSideMenu());
-//        setTitle("Ajouter Plat");
-//
-//        //poids,sodium,cholesterol,carbohydrate,protein,calories,nom
-//        TextField tfnom = new TextField("", "Nom (cm)");
-//        TextField tfPoids = new TextField("", "Poids (g)");
-//        TextField tfSodium = new TextField("", "Sodium (g)");
-//        TextField tfcholesterol = new TextField("", "cholesterol (g)");
-//        TextField tfcarbohydrate = new TextField("", "carbohydrate (g)");
-//        TextField tfprotein = new TextField("", "protein (g)");
-//        TextField tfcalories = new TextField("", "calories (Kcal)");
-//
-//        
-//
-//        Button btnValider = new Button("Ajouter Plat");
-//
-//        btnValider.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent evt) {
-//                
-//                if ((tfprotein.getText().length() == 0) || (tfcalories.getText().length() == 0) ||(tfcarbohydrate.getText().length() == 0) ||(tfcholesterol.getText().length() == 0) ||(tfnom.getText().length() == 0) || (tfPoids.getText().length() == 0) || (tfSodium.getText().length() == 0)) {
-//                    Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
-//                } else {
-//                    try {
-//                        //Integer.parseInt(tfTaille.getText())
-//                        Plat p = new Plat(Integer.parseInt(tfTaille.getText()), Integer.parseInt(tfPoids.getText()), Integer.parseInt(tfAge.getText()));
-//
-//                        if (genre.getSelectedIndex() == 0) {
-//                            cs.setGenre("homme");
-//                        } else {
-//                            cs.setGenre("femme");
-//                        }
-//
-//                        if (CaracService.getInstance().addCarac(cs)) {
-//                            Dialog.show("Success", "Connection accepted", new Command("OK"));
-//                        } else {
-//                            Dialog.show("ERROR", "Server error", new Command("OK"));
-//                        }
-//                    } catch (NumberFormatException e) {
-//                        Dialog.show("ERROR", "Erreur !!", new Command("OK"));
-//                    }
-//
-//                }
-//
-//            }
-//        });
-//
-//        addAll(tfTaille, tfPoids, tfAge, genre, btnValider);
-//        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> new caracSportShow(res).show());
+        
+
+        super(BoxLayout.y());
+        Toolbar tb = getToolbar();
+        tb.setTitleCentered(false);
+        
+        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> new PlatShow(res,current).show());
+
+        Button menuButton = new Button("");
+        menuButton.setUIID("Title");
+        FontImage.setMaterialIcon(menuButton, FontImage.MATERIAL_MENU);
+        menuButton.addActionListener(e -> getToolbar().openSideMenu());
+        setTitle("Ajouter Plat");
+
+        //poids,sodium,cholesterol,carbohydrate,protein,calories,nom
+        TextField tfnom = new TextField("", "Nom (cm)");
+        TextField tfPoids = new TextField("", "Poids (g)");
+        TextField tfSodium = new TextField("", "Sodium (g)");
+        TextField tfcholesterol = new TextField("", "cholesterol (g)");
+        TextField tfcarbohydrate = new TextField("", "carbohydrate (g)");
+        TextField tfprotein = new TextField("", "protein (g)");
+        TextField tfcalories = new TextField("", "calories (Kcal)");
+
+        
+
+        Button btnValider = new Button("Ajouter Plat");
+
+        btnValider.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                
+                if ((tfprotein.getText().length() == 0) || (tfcalories.getText().length() == 0) ||(tfcarbohydrate.getText().length() == 0) ||(tfcholesterol.getText().length() == 0) ||(tfnom.getText().length() == 0) || (tfPoids.getText().length() == 0) || (tfSodium.getText().length() == 0)) {
+                    Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
+                } else {
+                    try {
+                        //Integer.parseInt(tfTaille.getText())
+                         
+                        Plat p = new Plat(Integer.parseInt(tfPoids.getText()), Integer.parseInt(tfPoids.getText()), Integer.parseInt(tfcholesterol.getText()), Integer.parseInt(tfcarbohydrate.getText()), Integer.parseInt(tfprotein.getText()),Integer.parseInt(tfcalories.getText()), tfnom.getText());
+
+ 
+                        if (PlatService.getInstance().addPlat(p)) {
+                            Dialog.show("Success", "Connection accepted", new Command("OK"));
+                        } else {
+                            Dialog.show("ERROR", "Server error", new Command("OK"));
+                        }
+                    } catch (NumberFormatException e) {
+                        Dialog.show("ERROR", "Erreur !!", new Command("OK"));
+                    }
+
+                }
+
+            }
+        });
+ 
+
+        addAll(tfSodium,tfPoids,tfcholesterol,tfcarbohydrate,tfprotein,tfcalories,tfnom, btnValider);
+        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> new ProfileForm(res).show());
 
     }
 

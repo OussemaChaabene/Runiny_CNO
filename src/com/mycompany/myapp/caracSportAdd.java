@@ -38,7 +38,7 @@ public class caracSportAdd extends SideMenuBaseForm {
         menuButton.setUIID("Title");
         FontImage.setMaterialIcon(menuButton, FontImage.MATERIAL_MENU);
         menuButton.addActionListener(e -> getToolbar().openSideMenu());
-        setTitle("Add a new task");
+        setTitle("Ajouter infos");
 
         TextField tfTaille = new TextField("", "taille (cm)");
         TextField tfPoids = new TextField("", "Poids (Kg)");

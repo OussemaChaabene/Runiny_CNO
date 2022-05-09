@@ -16,6 +16,7 @@ public class Plat {
     public Plat() {
     }
 
+    
     public Plat(int poids, int sodium, int cholesterol, int carbohydrate, int protein, int calories, String nom) {
         this.poids = poids;
         this.sodium = sodium;

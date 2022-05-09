@@ -94,12 +94,12 @@ public class PlatService {
 
         req.setUrl(url);
 
-        req.addArgument("sodium", p.getSodium()+ "");
+        req.addArgument("sod", p.getSodium()+ "");
         req.addArgument("poids", p.getPoids() + "");
-        req.addArgument("cholesterol", p.getCholesterol() + "");
-        req.addArgument("carbohydrate", p.getCarbohydrate()+"");
-        req.addArgument("protein", p.getProtein()+"");
-        req.addArgument("calories", p.getProtein()+"");
+        req.addArgument("chol", p.getCholesterol() + "");
+        req.addArgument("carb", p.getCarbohydrate()+"");
+        req.addArgument("prot", p.getProtein()+"");
+        req.addArgument("cal", p.getProtein()+"");
         req.addArgument("nom", p.getNom());
 
         req.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -131,7 +131,7 @@ public class PlatService {
     }
 
     public boolean modifierPlat(Plat p) {
-        String url = statics.BASE_URL + "j/modifPlat?sodium=" + p.getSodium()+ "&cholesterol=" + p.getCholesterol()+ "&carbohydrate=" + p.getCarbohydrate()+ "&protein=" + p.getProtein()+"&calories="+p.getCalories()+"&nom="+p.getNom();
+        String url = statics.BASE_URL + "j/modifPlat?sod=" + p.getSodium()+ "&chol=" + p.getCholesterol()+ "&carb=" + p.getCarbohydrate()+ "&prot=" + p.getProtein()+"&cal="+p.getCalories()+"&nom="+p.getNom();
         req.setUrl(url);
 
         req.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -142,7 +142,7 @@ public class PlatService {
             }
         });
 
-        NetworkManager.getInstance().addToQueueAndWait(req);//execution ta3 request sinon yet3ada chy dima nal9awha
+        NetworkManager.getInstance().addToQueueAndWait(req);//executer request 
         return resultOK;
 
     }

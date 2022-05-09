@@ -5,12 +5,12 @@
  */
 package com.mycompany.myapp;
 
+import com.codename1.components.MultiButton;
 import com.codename1.ui.Button;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
-import com.codename1.ui.Label;
-import com.codename1.ui.plaf.Style;
+import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.util.Resources;
 import entities.CaracSport;
 import java.util.ArrayList;
@@ -20,43 +20,38 @@ import services.CaracService;
  *
  * @author ASUS
  */
-public class caracSportShow extends Form {
+public class caracSportShow extends SideMenuBaseForm {
 
     Form current;
 
-    public caracSportShow(Resources res) {
+    public caracSportShow(Resources res,Form previous) {
+
+        super(BoxLayout.y());
+
+        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> new ProfileForm(res).show());
 
         ArrayList<CaracSport> list = CaracService.getInstance().getAllCaracs();
-
         for (CaracSport c : list) {
-
-            Label taille = new Label();//taille,poids,prtoNeeds,calorieNeed,age,genre
-            taille.setText("-Taille : " + c.getTaille() + "\n");
-            Label poids = new Label();
-            poids.setText("-Poids : " + c.getPoids() + "\n");
-            Label besoinscal = new Label();
-            besoinscal.setText("-Besoins Calories : " + c.getCalorieNeed() + "\n");
-            Label besoinsprot = new Label();
-            besoinsprot.setText("-Besoins Proteins : " + c.getPrtoNeeds() + "\n");
-            Label age = new Label();
-            age.setText("-Age : " + c.getAge() + "\n");
-            Label genre = new Label();
-            genre.setText("-Sexe : " + c.getGenre() + "\n");
+            MultiButton fourLinesIcon = new MultiButton("nom");
+            fourLinesIcon.setTextLine1("Besoins proteins : " + c.getPrtoNeeds()+ "\n");
+            fourLinesIcon.setTextLine2("Taille : " + c.getTaille()+ "\n");
+            fourLinesIcon.setTextLine3("Poids : " + c.getPoids()+ "\n");
+            fourLinesIcon.setTextLine4("Besoins calories : " + c.getCalorieNeed()+ "\n");
+            
+     
+            
+            //modif button
             Button btnModifCarac = new Button("Modifié Carac");
             btnModifCarac.setUIID("LoginButton");
 
             //supprimer button
-            Label lSupprimer = new Label(" ");
-            lSupprimer.setUIID("NewsTopLine");
-            Style supprmierStyle = new Style(lSupprimer.getUnselectedStyle());
-            supprmierStyle.setFgColor(0xf21f1f);
-
-            FontImage suprrimerImage = FontImage.createMaterial(FontImage.MATERIAL_DELETE, supprmierStyle);
-            lSupprimer.setIcon(suprrimerImage);
-            lSupprimer.setTextPosition(RIGHT);
+            Button btnModifPlat = new Button("Modifier");
+            btnModifPlat.setUIID("LoginButton");
+            Button btnSup = new Button("Supprimer");
+            btnSup.setUIID("LoginButton");
 
             //click delete icon
-            lSupprimer.addPointerPressedListener(l -> {
+            btnSup.addPointerPressedListener(l -> {
 
                 Dialog dig = new Dialog("Suppression");
 
@@ -67,21 +62,26 @@ public class caracSportShow extends Form {
                 }
                 if (CaracService.getInstance().deleteCarac(c.getId())) {
                     System.out.println("supprimé");
-                    current.repaint();
-                    current.refreshTheme();
                 }
+                current.show();
+
 
             });
-            Label sep = new Label("\n------------------------------------");
-            addAll(btnModifCarac, taille, poids, besoinsprot, besoinscal, age, genre, sep,lSupprimer);
+            addAll(btnModifCarac, btnSup,fourLinesIcon);
         }
         setTitle("Liste caracs");
-
+         
+        //modif button
         Button btnAddCarac = new Button("Ajouter Carac");
         btnAddCarac.setUIID("LoginButton");
         btnAddCarac.addActionListener(e -> new caracSportAdd(current, res).show());
 
         addAll(btnAddCarac);
+    }
+
+    @Override
+    protected void showOtherForm(Resources res) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

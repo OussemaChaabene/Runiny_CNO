@@ -5,12 +5,12 @@
  */
 package com.mycompany.myapp;
 
+import com.codename1.components.MultiButton;
 import com.codename1.ui.*;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
-import com.codename1.ui.Label;
-import com.codename1.ui.plaf.Style;
+import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.util.Resources;
 import entities.Plat;
 import java.util.ArrayList;
@@ -20,44 +20,41 @@ import services.PlatService;
  *
  * @author ASUS
  */
-public class PlatShow extends Form{
-    
+public class PlatShow extends SideMenuBaseForm{
     Form current;
 
-    public PlatShow(Resources res) {
+    public PlatShow(Resources res,Form previous) {
+        super(BoxLayout.y());
+        Toolbar tb = getToolbar();
+        tb.setTitleCentered(false);
+        
+        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> new ProfileForm(res).show());
+
+        Button menuButton = new Button("");
+        menuButton.setUIID("Title");
+        FontImage.setMaterialIcon(menuButton, FontImage.MATERIAL_MENU);
+        menuButton.addActionListener(e -> getToolbar().openSideMenu());
+        setTitle("Liste Plats");
 
         ArrayList<Plat> list = PlatService.getInstance().getAllPlats();
 
         for (Plat p : list) {
-            //id,poids,sodium,cholesterol,carbohydrate,protein,calories,nom
-            Label nom = new Label();
-            nom.setText("-Taille : " + p.getNom()+ "\n");
-            Label poids = new Label();
-            poids.setText("-Poids : " + p.getPoids()+ "\n");
-            Label calories = new Label();
-            calories.setText("-Calories : " + p.getCalories()+ "\n");
-            Label protein = new Label();
-            protein.setText("-Proteins : " + p.getProtein()+ "\n");
-            Label sodium = new Label();
-            sodium.setText("-sodium : " + p.getSodium()+ "\n");
-            Label cholesterol = new Label();
-            cholesterol.setText("-cholesterol : " + p.getCholesterol()+ "\n");
-            Label carbohydrate = new Label();
-            carbohydrate.setText("-carbohydrate : " + p.getCarbohydrate()+ "\n");
-            Button btnModifPlat = new Button("Modifier Plat");
-            btnModifPlat.setUIID("LoginButton");
-
+     
+            MultiButton fourLinesIcon = new MultiButton(p.getNom());
+            fourLinesIcon.setTextLine2("Proteins : " + p.getProtein()+ "\n");
+            fourLinesIcon.setTextLine3("Poids : " + p.getPoids()+ "\n");
+            fourLinesIcon.setTextLine4("Calories : " + p.getCalories()+ "\n");
+            
             //supprimer button
-            Label lSupprimer = new Label(" ");
-            lSupprimer.setUIID("NewsTopLine");
-            Style supprmierStyle = new Style(lSupprimer.getUnselectedStyle());
-            supprmierStyle.setFgColor(0xf21f1f);
-
-            FontImage suprrimerImage = FontImage.createMaterial(FontImage.MATERIAL_DELETE, supprmierStyle);
-            lSupprimer.setIcon(suprrimerImage);
-
-            //click delete icon
-            lSupprimer.addPointerPressedListener(l -> {
+            Button btnModifPlat = new Button("Modifier");
+            btnModifPlat.setUIID("LoginButton");
+            Button btnSupPlat = new Button("Supprimer");
+            btnSupPlat.setUIID("LoginButton");
+            
+         
+            
+            //click sup button
+            btnSupPlat.addPointerPressedListener(l -> {
 
                 Dialog dig = new Dialog("Suppression");
 
@@ -68,14 +65,14 @@ public class PlatShow extends Form{
                 }
                 if (PlatService.getInstance().deletePlat(p.getId())) {
                     System.out.println("supprimé");
-                    current.repaint();
-                    current.refreshTheme();
+                              
+
                 }
+                current.show();
 
             });
-            Label sep = new Label("\n------------------------------------");
             
-            addAll(btnModifPlat, poids,sodium,cholesterol,carbohydrate,protein,calories,nom, sep,lSupprimer);
+            addAll(fourLinesIcon,btnModifPlat, /*poids,sodium,cholesterol,carbohydrate,protein,calories,nom,*/btnSupPlat);
         }
 
         Button btnAddPlat = new Button("Ajouter Plat");
@@ -83,6 +80,11 @@ public class PlatShow extends Form{
         btnAddPlat.addActionListener(e -> new PlatAdd(current, res).show());
 
         addAll(btnAddPlat);
+    }
+
+    @Override
+    protected void showOtherForm(Resources res) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     
