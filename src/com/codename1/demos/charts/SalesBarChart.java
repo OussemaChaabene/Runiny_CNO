@@ -73,7 +73,7 @@ public class SalesBarChart extends AbstractDemoChart {
         int[] colors = new int[]{ColorUtil.CYAN, ColorUtil.BLUE};
         XYMultipleSeriesRenderer renderer = buildBarRenderer(colors);
         renderer.setOrientation(Orientation.HORIZONTAL);
-        setChartSettings(renderer, "Monthly sales in the last 2 years", "Month", "Units sold", 0.5,
+        setChartSettings(renderer, "Vos achat pendant les 2 dernieres années", "Mois", "Montant", 0.5,
                 12.5, 0, 24000, ColorUtil.GRAY, ColorUtil.LTGRAY);
         renderer.setXLabels(1);
         renderer.setYLabels(10);
