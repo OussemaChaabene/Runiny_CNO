@@ -65,11 +65,9 @@ public class SalesBarChart extends AbstractDemoChart {
     public Component execute() {
         String[] titles = new String[]{"2021", "2022"};
         List<double[]> values = new ArrayList<double[]>();
-        values.add(new double[]{5230, 7300, 9240, 10540, 7900, 9200, 12030, 11200, 9500, 10500,
-            11600, 13500});
+        values.add(new double[]{5230, 7300});
         
-        values.add(new double[]{14230, 12300, 14240, 15244, 15900, 19200, 22030, 21200, 19500, 15500,
-            12600, 14000});
+        values.add(new double[]{14230, 12300});
         int[] colors = new int[]{ColorUtil.CYAN, ColorUtil.BLUE};
         XYMultipleSeriesRenderer renderer = buildBarRenderer(colors);
         renderer.setOrientation(Orientation.HORIZONTAL);
@@ -77,12 +75,8 @@ public class SalesBarChart extends AbstractDemoChart {
                 12.5, 0, 24000, ColorUtil.GRAY, ColorUtil.LTGRAY);
         renderer.setXLabels(1);
         renderer.setYLabels(10);
-        renderer.addXTextLabel(1, "Jan");
-        renderer.addXTextLabel(3, "Mar");
-        renderer.addXTextLabel(5, "May");
-        renderer.addXTextLabel(7, "Jul");
-        renderer.addXTextLabel(10, "Oct");
-        renderer.addXTextLabel(12, "Dec");
+        
+        
         initRendererer(renderer);
         int length = renderer.getSeriesRendererCount();
         for (int i = 0; i < length; i++) {
