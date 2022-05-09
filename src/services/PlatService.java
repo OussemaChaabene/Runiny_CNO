@@ -86,6 +86,22 @@ public class PlatService {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return plats;
     }
+    
+    public ArrayList<Plat> getAllPlatsByName(String nom) {
+
+        String url = statics.BASE_URL + "j/plat/all?nom="+nom;
+        req.setUrl(url);
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                plats = parsePlats(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return plats;
+    }
 
     public boolean addPlat(Plat p) {
         System.out.println(p.toString());
