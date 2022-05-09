@@ -24,7 +24,7 @@ public class caracSportShow extends SideMenuBaseForm {
 
     Form current;
 
-    public caracSportShow(Resources res,Form previous) {
+    public caracSportShow(Resources res) {
 
         super(BoxLayout.y());
 
@@ -78,6 +78,8 @@ public class caracSportShow extends SideMenuBaseForm {
 
         addAll(btnAddCarac);
     }
+
+   
 
     @Override
     protected void showOtherForm(Resources res) {

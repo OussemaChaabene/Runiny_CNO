@@ -20,6 +20,7 @@
 package com.mycompany.myapp;
 
 import com.codename1.components.ToastBar;
+import com.codename1.demos.charts.ChartDemosForm;
 import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
@@ -65,9 +66,11 @@ public abstract class SideMenuBaseForm extends Form {
         
         getToolbar().addComponentToSideMenu(sidemenuTop);
         getToolbar().addMaterialCommandToSideMenu("  Dashboard", FontImage.MATERIAL_DASHBOARD,  e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Caracteristique", FontImage.MATERIAL_ALBUM,  e -> new caracSportShow(res,current).show());
+        getToolbar().addMaterialCommandToSideMenu("  Caracteristique", FontImage.MATERIAL_INFO,  e -> new caracSportShow(res).show());
         getToolbar().addMaterialCommandToSideMenu("  Plats", FontImage.MATERIAL_ALBUM,  e -> new PlatShow(res,current).show());
+        getToolbar().addMaterialCommandToSideMenu("  stats", FontImage.MATERIAL_SCORE,  e -> new ChartDemosForm().show());
         getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP,  e -> new LoginForm(res).show());
+        
     }
     
     protected abstract void showOtherForm(Resources res);
