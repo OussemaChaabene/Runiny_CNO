@@ -39,7 +39,7 @@ public class SalesBarChart extends AbstractDemoChart {
      * @return the chart name
      */
     public String getName() {
-        return "Sales horizontal bar chart";
+        return "Achats par mois";
     }
 
     /**
@@ -48,7 +48,7 @@ public class SalesBarChart extends AbstractDemoChart {
      * @return the chart description
      */
     public String getDesc() {
-        return "The monthly sales for the last 2 years (horizontal bar chart)";
+        return "Vos achat pendant les 2 dernieres années";
     }
 
     @Override
@@ -63,10 +63,11 @@ public class SalesBarChart extends AbstractDemoChart {
 
     @Override
     public Component execute() {
-        String[] titles = new String[]{"2007", "2008"};
+        String[] titles = new String[]{"2021", "2022"};
         List<double[]> values = new ArrayList<double[]>();
         values.add(new double[]{5230, 7300, 9240, 10540, 7900, 9200, 12030, 11200, 9500, 10500,
             11600, 13500});
+        
         values.add(new double[]{14230, 12300, 14240, 15244, 15900, 19200, 22030, 21200, 19500, 15500,
             12600, 14000});
         int[] colors = new int[]{ColorUtil.CYAN, ColorUtil.BLUE};
