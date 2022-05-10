@@ -20,6 +20,7 @@
 package com.mycompany.myapp;
 
 import com.codename1.components.ToastBar;
+import com.codename1.demos.charts.ChartDemosForm;
 import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
@@ -35,6 +36,7 @@ import com.codename1.ui.util.Resources;
  * @author Shai Almog
  */
 public abstract class SideMenuBaseForm extends Form {
+    Form current;
 
     public SideMenuBaseForm(String title, Layout contentPaneLayout) {
         super(title, contentPaneLayout);
@@ -64,10 +66,12 @@ public abstract class SideMenuBaseForm extends Form {
         
         getToolbar().addComponentToSideMenu(sidemenuTop);
         getToolbar().addMaterialCommandToSideMenu("  Dashboard", FontImage.MATERIAL_DASHBOARD,  e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Activity", FontImage.MATERIAL_TRENDING_UP,  e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Tasks", FontImage.MATERIAL_ACCESS_TIME,  e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Account Settings", FontImage.MATERIAL_SETTINGS,  e -> showOtherForm(res));
+        getToolbar().addMaterialCommandToSideMenu("  Caracteristique", FontImage.MATERIAL_INFO,  e -> new caracSportShow(res).show());
+        getToolbar().addMaterialCommandToSideMenu("  Plats", FontImage.MATERIAL_ALBUM,  e -> new PlatShow(res,current).show());
+        getToolbar().addMaterialCommandToSideMenu("  Reservation Seance Privée", FontImage.MATERIAL_INFO,  e -> new ReservShow(res).show());
+        getToolbar().addMaterialCommandToSideMenu("  stats", FontImage.MATERIAL_SCORE,  e -> new ChartDemosForm().show());
         getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP,  e -> new LoginForm(res).show());
+        
     }
     
     protected abstract void showOtherForm(Resources res);
