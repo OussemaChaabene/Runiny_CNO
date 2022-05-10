@@ -42,7 +42,7 @@ public class ReservAdd extends SideMenuBaseForm {
         menuButton.setUIID("Title");
         FontImage.setMaterialIcon(menuButton, FontImage.MATERIAL_MENU);
         menuButton.addActionListener(e -> getToolbar().openSideMenu());
-        setTitle("Ajouter infos");
+        setTitle("Reserver seance privée");
 
         TextField tfTaille = new TextField("", "taille (cm)");
         TextField tfPoids = new TextField("", "Poids (Kg)");
@@ -97,4 +97,3 @@ public class ReservAdd extends SideMenuBaseForm {
     }
 
 }
-
