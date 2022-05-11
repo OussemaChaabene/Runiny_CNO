@@ -20,6 +20,7 @@
 package com.mycompany.myapp;
 
 import com.codename1.components.ToastBar;
+import com.codename1.demos.charts.ChartDemosForm;
 import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
@@ -35,6 +36,7 @@ import com.codename1.ui.util.Resources;
  * @author Shai Almog
  */
 public abstract class SideMenuBaseForm extends Form {
+    Form current;
 
     public SideMenuBaseForm(String title, Layout contentPaneLayout) {
         super(title, contentPaneLayout);
@@ -76,5 +78,5 @@ public abstract class SideMenuBaseForm extends Form {
 
     void addSideMenu(Resources res) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+}
 }

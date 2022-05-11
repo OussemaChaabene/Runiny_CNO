@@ -78,5 +78,3 @@ public eventShow(Resources res,Form current) {
     }
 
 }
-    
-
