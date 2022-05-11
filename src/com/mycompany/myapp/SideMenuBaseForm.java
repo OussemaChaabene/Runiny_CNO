@@ -64,11 +64,26 @@ public abstract class SideMenuBaseForm extends Form {
         
         getToolbar().addComponentToSideMenu(sidemenuTop);
         getToolbar().addMaterialCommandToSideMenu("  Dashboard", FontImage.MATERIAL_DASHBOARD,  e -> showOtherForm(res));
+<<<<<<< Updated upstream
         getToolbar().addMaterialCommandToSideMenu("  Activity", FontImage.MATERIAL_TRENDING_UP,  e -> showOtherForm(res));
         getToolbar().addMaterialCommandToSideMenu("  Tasks", FontImage.MATERIAL_ACCESS_TIME,  e -> showOtherForm(res));
         getToolbar().addMaterialCommandToSideMenu("  Account Settings", FontImage.MATERIAL_SETTINGS,  e -> showOtherForm(res));
         getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP,  e -> new LoginForm(res).show());
+=======
+        getToolbar().addMaterialCommandToSideMenu("  Caracteristique", FontImage.MATERIAL_INFO,  e -> new caracSportShow(res).show());
+        getToolbar().addMaterialCommandToSideMenu("  Plats", FontImage.MATERIAL_ALBUM,  e -> new PlatShow(res,current).show());
+        getToolbar().addMaterialCommandToSideMenu("  stats", FontImage.MATERIAL_SCORE,  e -> new ChartDemosForm().show());
+        getToolbar().addMaterialCommandToSideMenu("  Events", FontImage.MATERIAL_DASHBOARD,  e -> new eventShow(res,current).show());
+        getToolbar().addMaterialCommandToSideMenu("Stat Evenement", FontImage.MATERIAL_SETTINGS, e -> new statevent(res).show());
+        getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP,  e -> new LoginForm(res).show());
+     
+        
+>>>>>>> Stashed changes
     }
     
     protected abstract void showOtherForm(Resources res);
+
+    void addSideMenu(Resources res) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
