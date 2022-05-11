@@ -5,7 +5,8 @@
  */
 package entities;
 
-import java.time.LocalDateTime;
+
+import java.util.Date;
 
 /**
  *
@@ -13,29 +14,37 @@ import java.time.LocalDateTime;
  */
 public class Seance {
     private int id_seance;
-    private LocalDateTime date;
+    private Date date;
     private String typeseance;
 
-    public Seance(int id_seance, LocalDateTime date, String typeseance) {
+    public Seance(int id_seance, Date date, String typeseance) {
         this.id_seance = id_seance;
         this.date = date;
         this.typeseance = typeseance;
     }
 
-    public Seance(LocalDateTime date, String typeseance) {
+    public Seance(Date date, String typeseance) {
         this.date = date;
         this.typeseance = typeseance;
     }
 
     public Seance() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
-    public LocalDateTime getDate() {
+    public int getId_seance() {
+        return id_seance;
+    }
+
+    public void setId_seance(int id_seance) {
+        this.id_seance = id_seance;
+    }
+
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
