@@ -5,6 +5,7 @@
  */
 package com.mycompany.myapp;
 
+import com.codename1.components.FloatingActionButton;
 import com.codename1.components.MultiButton;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
@@ -70,7 +71,7 @@ public class SncShow extends SideMenuBaseForm{
                     dig.dispose();
                 }
                 if (SncService.getInstance().deleteSnc(s.getId_seance())) {
-                    System.out.println("supprimé");
+                    System.out.println("Supprimé");
                     dig.dispose();        
 
                 }
@@ -79,12 +80,15 @@ public class SncShow extends SideMenuBaseForm{
             });
             
         }
+        FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
+        fab.addActionListener(e -> new SncAdd(current, res).show());
+        //fab.bindFabToContainer(current.getContentPane());
 
-        Button btnAddSnc = new Button("Ajouter seance");
+       /* Button btnAddSnc = new Button("Ajouter seance");
         btnAddSnc.setUIID("LoginButton");
-        btnAddSnc.addActionListener(e -> new SncAdd(current, res).show());
+        btnAddSnc.addActionListener(e -> new SncAdd(current, res).show());*/
 
-        addAll(btnAddSnc,container);
+        addAll(container,fab);
     }
 
     @Override
