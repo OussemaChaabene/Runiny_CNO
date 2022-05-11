@@ -5,16 +5,18 @@
  */
 package entities;
 
+import java.time.LocalDateTime;
+
 public class Reservation {
     private int id_reser;
     private int id_user;
     private int id_even;
     private int id_coach;
     private int id_salle;
-    private String date;
+    private LocalDateTime date;
     public static Reservation user;
 
-    public Reservation(int id_reser, int id_user, int id_even,int id_coach, int id_salle, String date) {
+    public Reservation(int id_reser, int id_user, int id_even,int id_coach, int id_salle, LocalDateTime date) {
         this.id_reser = id_reser;
         this.id_user = id_user;
         this.id_even = id_even;
@@ -23,7 +25,7 @@ public class Reservation {
         this.date = date;
     }
 
-    public Reservation(int id_user, int id_even, int id_salle, String date) {
+    public Reservation(int id_user, int id_even, int id_salle, LocalDateTime date) {
         this.id_user = id_user;
         this.id_even = id_even;
         this.id_coach = id_coach;
@@ -78,11 +80,11 @@ public class Reservation {
         this.id_salle = id_salle;
     }
 
-    public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

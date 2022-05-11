@@ -68,7 +68,7 @@ public abstract class SideMenuBaseForm extends Form {
         getToolbar().addMaterialCommandToSideMenu("  Dashboard", FontImage.MATERIAL_DASHBOARD,  e -> showOtherForm(res));
         getToolbar().addMaterialCommandToSideMenu("  Caracteristique", FontImage.MATERIAL_INFO,  e -> new caracSportShow(res).show());
         getToolbar().addMaterialCommandToSideMenu("  Plats", FontImage.MATERIAL_ALBUM,  e -> new PlatShow(res,current).show());
-        getToolbar().addMaterialCommandToSideMenu("  Reservation Seance Privée", FontImage.MATERIAL_INFO,  e -> new ReservShow(res).show());
+        getToolbar().addMaterialCommandToSideMenu("  Reservation Seance Privée", FontImage.MATERIAL_INFO,  e -> new SncShow(res).show());
         getToolbar().addMaterialCommandToSideMenu("  stats", FontImage.MATERIAL_SCORE,  e -> new ChartDemosForm().show());
         getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP,  e -> new LoginForm(res).show());
         
