@@ -20,7 +20,9 @@
 package com.mycompany.myapp;
 
 import com.codename1.ui.Button;
+import com.codename1.ui.Command;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
@@ -32,6 +34,9 @@ import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
+import entities.User;
+import java.io.IOException;
+import services.UserService;
 
 /**
  * The Login form
@@ -39,6 +44,7 @@ import com.codename1.ui.util.Resources;
  * @author Shai Almog
  */
 public class LoginForm extends Form {
+    UserService us;
     public LoginForm(Resources theme) {
         super(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER_ABSOLUTE));
         setUIID("LoginForm");
@@ -55,9 +61,9 @@ public class LoginForm extends Form {
         Label profilePicLabel = new Label(profilePic, "ProfilePic");
         profilePicLabel.setMask(mask.createMask());
         
-        TextField login = new TextField("jennifer.wilson88@gmail.com", "Login", 20, TextField.EMAILADDR) ;
-        TextField password = new TextField("password", "Password", 20, TextField.PASSWORD) ;
-        login.getAllStyles().setMargin(LEFT, 0);
+        TextField Email = new TextField("", "Login", 20, TextField.EMAILADDR) ;
+        TextField password = new TextField("", "Password", 20, TextField.PASSWORD) ;
+        Email.getAllStyles().setMargin(LEFT, 0);
         password.getAllStyles().setMargin(LEFT, 0);
         Label loginIcon = new Label("", "TextField");
         Label passwordIcon = new Label("", "TextField");
@@ -66,17 +72,24 @@ public class LoginForm extends Form {
         FontImage.setMaterialIcon(loginIcon, FontImage.MATERIAL_PERSON_OUTLINE, 3);
         FontImage.setMaterialIcon(passwordIcon, FontImage.MATERIAL_LOCK_OUTLINE, 3);
         
-        Button loginButton = new Button("LOGIN");
+      Button loginButton = new Button("LOGIN");
         loginButton.setUIID("LoginButton");
         loginButton.addActionListener(e -> {
-            Toolbar.setGlobalToolbar(false);
-            new WalkthruForm(theme).show();
-            Toolbar.setGlobalToolbar(true);
+            if ((Email.getText().length() == 0) || (password.getText().length() == 0)) {
+                Dialog.show("Alert", "Please fill all fields", new Command("OK"));
+            } else {
+                
+              if(UserService.getInstance().loginAction(Email.getText(), password.getText(), theme))
+              {
+                  new ProfileForm(theme).show();
+              }
+            }
+            
         });
         
         Button createNewAccount = new Button("CREATE NEW ACCOUNT");
         createNewAccount.setUIID("CreateNewAccountButton");
-        
+        createNewAccount.addActionListener(e -> new CreatAcc(theme).show());
         // We remove the extra space for low resolution devices so things fit better
         Label spaceLabel;
         if(!Display.getInstance().isTablet() && Display.getInstance().getDeviceDensity() < Display.DENSITY_VERY_HIGH) {
@@ -90,7 +103,7 @@ public class LoginForm extends Form {
                 welcome,
                 profilePicLabel,
                 spaceLabel,
-                BorderLayout.center(login).
+                BorderLayout.center(Email).
                         add(BorderLayout.WEST, loginIcon),
                 BorderLayout.center(password).
                         add(BorderLayout.WEST, passwordIcon),
