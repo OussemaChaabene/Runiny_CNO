@@ -42,14 +42,15 @@ public class abonnementS {
 
     public ArrayList<abonnement> parseabonnement(String jsonText) {
         try {
+            
             abs = new ArrayList<>();
             JSONParser j = new JSONParser();
             Map<String, Object> tasksListJson
                     = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
 
-            List<Map<String, Object>> list = (List<Map<String, Object>>) tasksListJson.get("root");
+            List<Map<String, Object>> listOfMaps = (List<Map<String, Object>>) tasksListJson.get("root");
 
-            for (Map<String, Object> obj : list) {
+            for    (Map<String,Object> obj : listOfMaps) {
                 abonnement ab = new abonnement();
                 
                  ab.setId((int) Float.parseFloat(obj.get("id").toString()));
@@ -67,7 +68,7 @@ public class abonnementS {
 
     public ArrayList<abonnement> getAllCaracs() {
 
-        String url = statics.BASE_URL + "j/caracs";
+        String url = statics.BASE_URL + "/abonnement";
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -85,7 +86,7 @@ public class abonnementS {
         System.out.println(cs.toString());
         System.out.println("********");
         //String url = Statics.BASE_URL + "create?name=" + t.getName() + "&status=" + t.getStatus();
-        String url = statics.BASE_URL + "j/addCarac";
+        String url = statics.BASE_URL + "/";
 
         req.setUrl(url);
 
@@ -104,7 +105,7 @@ public class abonnementS {
         return resultOK;
     }
 
-    public boolean deleteCarac(int id) {
+    public boolean deleteabonnement(int id) {
         String url = statics.BASE_URL + "j/suppCarac/" + id;
 
         req.setUrl(url);

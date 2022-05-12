@@ -23,6 +23,7 @@ import utils.statics;
  *
  * @author MSI
  */
+
 public class categorieaboS {
       public ArrayList<categorieabo> abs;
 
@@ -50,7 +51,7 @@ public class categorieaboS {
 
             List<Map<String, Object>> list = (List<Map<String, Object>>) tasksListJson.get("root");
 
-            for (Map<String, Object> obj : list) {
+            for(Map<String, Object> obj : list) {
                 categorieabo ab = new categorieabo();
                 
                  ab.setId((int) Float.parseFloat(obj.get("id").toString()));
@@ -65,7 +66,7 @@ public class categorieaboS {
         return abs;
     }
 
-    public ArrayList<abonnement> getAllCaracs() {
+    public ArrayList<categorieabo> getAllCaracs() {
 
         String url = statics.BASE_URL + "j/caracs";
         req.setUrl(url);
@@ -137,4 +138,5 @@ public class categorieaboS {
         return resultOK;
 
     }
-}
+  }  
+
